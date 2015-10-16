@@ -69,7 +69,7 @@
             <blockquote>
               Software is eating the world.
             </blockquote>
-            <span style="float: right;">Marc Andreesen</span>
+            <span style="float: right;">- Marc Andreesen</span>
           </section>
         </section>
         <section>
@@ -101,7 +101,7 @@ for block, next_block in _peeking_iterator(iterable):
             <blockquote>
               The art of programming is the art of organizing complexity, of mastering multitude and avoiding its chaos as effectively as possible.
             </blockquote>
-            <span class="float: right;"><a href="https://en.wikiquote.org/wiki/Edsger_W._Dijkstra#1970s">- Edsger Dijkstra</a></span>
+            <span style="float: right;"><a href="https://en.wikiquote.org/wiki/Edsger_W._Dijkstra#1970s">- Edsger Dijkstra</a></span>
           </section>
         </section>
         <section>
@@ -121,16 +121,16 @@ for block, next_block in _peeking_iterator(iterable):
             </blockquote>
             <span style="float: right;"><a href="http://www.goodreads.com/quotes/9168-programs-must-be-written-for-people-to-read-and-only">- Harold Abelson</a></span>
           </section>
-          <section>
-            <pre><code data-trim>
+          <section style="width: 960px; height: 700px;">
+            <pre style="width: 960px; height: 700px; posiition: absolute; margin-top: -50px"><code data-trim style="width: 960px; height: 700px; max-height: 700px;">
 def generate_file(runs):
     variable_order = None
     for run in runs:
         if not variable_order:
             variable_order = [v.name for v in run.input_variables]
             yield ','.join(variable_order) +'\n'
-
-      if sorted(v.name for v in run.input_variables) != sorted(variable_order):
+      sorted_names = sorted(v.name for v in run.input_variables)
+      if sorted_names != sorted(variable_order):
           raise ValueError(
               'Mixed runs with different variables'
           )
@@ -142,8 +142,8 @@ def generate_file(runs):
       yield ','.join(values) + '\n'
             </code></pre>
           </section>
-          <section>
-            <pre><code data-trim>
+          <section style="width: 960px; height: 700px;">
+            <pre style="width: 960px; height: 700px; posiition: absolute; margin-top: -50px"><code data-trim style="width: 960px; height: 700px; max-height: 700px;">
 def generate_file(runs):
     variable_order = None
     for run in runs:
