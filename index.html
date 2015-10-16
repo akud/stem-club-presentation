@@ -122,7 +122,56 @@ for block, next_block in _peeking_iterator(iterable):
             <span style="float: right;"><a href="http://www.goodreads.com/quotes/9168-programs-must-be-written-for-people-to-read-and-only">- Harold Abelson</a></span>
           </section>
           <section>
-          TODO: example code before and after
+            <pre><code data-trim>
+def generate_file(runs):
+    variable_order = None
+    for run in runs:
+        if not variable_order:
+            variable_order = [v.name for v in run.input_variables]
+            yield ','.join(variable_order) +'\n'
+
+      if sorted(v.name for v in run.input_variables) != sorted(variable_order):
+          raise ValueError(
+              'Mixed runs with different variables'
+          )
+      sorted_variables = sorted(
+        run.input_variables,
+        key=lambda v: variable_order.index(v.name)
+      )
+      values = [str(v.value) for v in variables]
+      yield ','.join(values) + '\n'
+            </code></pre>
+          </section>
+          <section>
+            <pre><code data-trim>
+def generate_file(runs):
+    variable_order = None
+    for run in runs:
+        if not variable_order:
+            variable_order = _names(run.input_variables)
+            yield _make_line(variable_order)
+
+        yield _make_line(_var_values(run, variable_order))
+
+def _make_line(values):
+    return ','.join(values) + '\n'
+
+def _names(run_variables):
+    return [v.name for v in run_variables]
+
+def _var_values( run, var_names):
+    run_variables = run.input_variables
+    if sorted(_names(run_variables)) != sorted(var_names):
+        raise ValueError(
+            'Mixed runs with different variables, '
+            'expected {0}, got {1}'.format(
+                var_names, _names(run))
+        )
+    return [
+        str(v.value) for v in
+        sorted(run_variables, key=lambda var: var_names.index(var.name))
+    ]
+            </code></pre>
           </section>
         </section>
         <section>
